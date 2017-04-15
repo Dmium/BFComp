@@ -1,0 +1,67 @@
+CPU
+
++
+add one to current value in tape
+
+-
+subtract one from current value in tape
+
+>
+inciment position in tape
+
+<
+decriment position in tape
+
+[
+jump to matching ] if current position in tape is 0
+
+]
+jump to matching [ if current position in tape is not 0
+
+.
+output current position in tape to output buffer
+
+,
+take from input (and wait for further input?
+
+
+Registers
+Name				bits	description
+Instruction Pointer		8-12	Points to instruction in instruction  RAM
+Current Instruction Register	3	Contains currently executing command
+Instruction Change Register	2	0(no change) 1(+1) 2(-1) 3(?) change at the end of a cycle
+Alternate instruction register	1	Basically the 4th bit on instruction register
+Tape Pointer			8-12	Points to current tape position in tape RAM
+Current Tape Register		8	Contains the number at the current position in the tape
+Tape Change Register		2	0(no change) 1(+1) 2(-1) 3(?) change at the end of a cycle
+
+
+
+instruction execution
+1.
+Load instruction at address in program Instruction Pointer  from RAM into Current Instruction Register
+2.
+(Simultaneously?) load current position in tape at address in Tape Pointer into Current Tape Register
+3.
+Activate correct board
+4.
+Allow clock to ALU
+4.
+Execute instruction
+6.
+Most likely
+	Store result of instruction on Tape Register
+	Store contents of Tape Register in tape at current tape 
+Possibly
+	Store result of instruction directly in Tape 
+7.
+Incriment Instruction Pointer by Content of Instruction change register(using ALU's + function?)
+Incriment Tape Pointer by content of Tape change register(using ALU's + function?)
+
+ALU board notes
+
+Per module:
+Either take 3 bits to confirm activation or select board using clock
+Take 8 bits from current tape register
+Output 
+
